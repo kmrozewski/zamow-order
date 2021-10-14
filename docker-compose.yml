@@ -1,0 +1,29 @@
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  api:
+    build: ./api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=orders
+      - MYSQL_USER=test_user
+      - MYSQL_PASSWORD=test_password123
+    ports: 
+      - "3306:3306"
+      - "33060:33060"
+    volumes:
+      - ./docker/data/db:/var/lib/mysql
+      - ./docker/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
