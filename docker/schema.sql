@@ -1,5 +1,7 @@
-create table orders(
-	id int unsigned auto_increment primary key,
-	name varchar(30) not null,
-	promo_code int(8)
+CREATE TABLE IF NOT EXISTS order_detail (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	order_number VARCHAR(12) NOT NULL,
+	email VARCHAR(250) NOT NULL,
+	promo_code VARCHAR(8),
+	quantity INT(4) NOT NULL
 )

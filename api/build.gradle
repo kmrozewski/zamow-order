@@ -6,12 +6,22 @@ plugins {
 group 'com.zamoworder'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.5.5'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.5'
+    implementation 'mysql:mysql-connector-java:8.0.26'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'io.vavr:vavr:0.10.4'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
@@ -20,6 +30,7 @@ test {
     useJUnitPlatform()
 }
 
+//TODO: check if it's necessary
 jar {
     manifest {
         attributes(
