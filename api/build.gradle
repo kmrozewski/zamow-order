@@ -1,7 +1,27 @@
 plugins {
     id 'org.springframework.boot' version '2.5.5'
     id 'java'
+    id 'groovy'
 }
+
+// This adds the /src/utils/groovy as a source directory
+sourceSets {
+    utils {
+        java
+        groovy
+
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+    }
+}
+
+configurations {
+    // This ensures /src/utils/groovy has access to all dependencies from src & test directories
+    utilsCompile.extendsFrom compile
+    utilsCompile.extendsFrom testCompile
+    utilsRuntime.extendsFrom runtime
+}
+
 
 group 'com.zamoworder'
 version '1.0-SNAPSHOT'
@@ -16,6 +36,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.5'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.5'
     implementation 'org.hibernate:hibernate-entitymanager:5.5.6'
     implementation 'mysql:mysql-connector-java:8.0.26'
 
@@ -24,19 +45,17 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'io.vavr:vavr:0.10.4'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation "org.codehaus.groovy:groovy:3.0.8"
+    testImplementation platform("org.spockframework:spock-bom:2.0-groovy-3.0")
+    testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+    testImplementation 'org.spockframework:spock-junit4:2.0-groovy-3.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {
     useJUnitPlatform()
-}
-
-//TODO: check if it's necessary
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'com.zamoworder.api.Application'
-        )
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }

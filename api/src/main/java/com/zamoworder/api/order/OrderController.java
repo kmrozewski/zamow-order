@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -23,10 +25,8 @@ public class OrderController {
     final OrderValidator validator;
 
     @PostMapping("/create")
-    public ResponseEntity<OrderDetail> createOrder(@RequestBody OrderRequest orderRequest) {
-        //TODO: validation of the quantity
+    public ResponseEntity<OrderDetail> createOrder(@Valid @RequestBody OrderRequest orderRequest) {
         var response = service.createOrder(orderRequest);
-
-        return new ResponseEntity<OrderDetail>(response, OK);
+        return new ResponseEntity<>(response, OK);
     }
 }

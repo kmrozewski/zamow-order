@@ -41,7 +41,7 @@ public class OrderService {
         return new OrderDetail(orderNumber, orderRequest.getEmail(), orderRequest.getQuantity(), discount);
     }
 
-    private Integer getDiscount(OrderRequest orderRequest) {
+    Integer getDiscount(OrderRequest orderRequest) {
         return Try.of(() -> orderRequest)
                 .filter(validator::isValidPromoCode)
                 .onFailure(throwable -> log.debug("Promo code is not valid: {}", orderRequest))
@@ -52,7 +52,6 @@ public class OrderService {
                 .getOrElse(NO_DISCOUNT);
     }
 
-    @Transactional //TODO: check if this annotation is needed here
     boolean isEligiblePromoCode(String promoCode) {
         return repository.findByPromoCode(promoCode).isEmpty();
     }
