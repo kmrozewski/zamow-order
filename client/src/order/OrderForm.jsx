@@ -49,7 +49,6 @@ export default function OrderForm(props) {
 					type="text"
 					name="promoCode"
 					placeholder="enter promo code if you have it"
-					pattern="[0-9]{2,8}"
 				/>
 			</Form.Group>
 			<Button id="orderBtn" type="submit">Place order</Button>
