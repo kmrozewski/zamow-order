@@ -11,14 +11,13 @@ export default function App() {
     <Router>
       <Suspense fallback={<Spinner animation="border" />}>
         <Switch>
-          <Route path="/order">
+          <Route path={"/order"}>
             <Route path={"/order/create"} exact component={Order}/>
             <Route path={"/order/detail"} exact component={OrderDetail}/>
             <Route path={"/order/error"} exact component={OrderError}/>
-            <Redirect from="/order" to="/order/create" exact/>
+            <Redirect from={"/order"} to={"/order/create"} exact/>
           </Route>
-          <Route path={"/"} exact component={Order}/>
-          <Redirect to={"/"}/>
+          <Redirect from={"/"} to={"/order"}/>
         </Switch>
       </Suspense>
     </Router>

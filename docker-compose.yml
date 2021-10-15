@@ -8,6 +8,8 @@ services:
 
   api:
     build: ./api
+    environment:
+      - MYSQL_HOST=db
     ports:
       - "8080:8080"
     depends_on:
