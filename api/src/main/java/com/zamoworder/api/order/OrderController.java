@@ -1,10 +1,11 @@
 package com.zamoworder.api.order;
 
 import com.zamoworder.api.order.model.OrderRequest;
-import com.zamoworder.api.order.model.OrderResponse;
+import com.zamoworder.api.order.model.OrderDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +23,10 @@ public class OrderController {
     final OrderValidator validator;
 
     @PostMapping("/create")
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<OrderDetail> createOrder(@RequestBody OrderRequest orderRequest) {
         //TODO: validation of the quantity
         var response = service.createOrder(orderRequest);
 
-        return new ResponseEntity<OrderResponse>(response, OK);
+        return new ResponseEntity<OrderDetail>(response, OK);
     }
 }

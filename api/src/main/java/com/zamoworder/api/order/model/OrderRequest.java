@@ -1,10 +1,12 @@
 package com.zamoworder.api.order.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderRequest {
     String email;
     Integer quantity;

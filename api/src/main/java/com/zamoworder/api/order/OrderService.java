@@ -1,8 +1,8 @@
 package com.zamoworder.api.order;
 
 import com.zamoworder.api.order.model.OrderRequest;
-import com.zamoworder.api.order.model.OrderResponse;
-import com.zamoworder.api.order.repository.OrderEntity;
+import com.zamoworder.api.order.model.OrderDetail;
+import com.zamoworder.api.order.repository.OrderDetailEntity;
 import com.zamoworder.api.order.repository.OrderRepository;
 import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
@@ -27,18 +27,18 @@ public class OrderService {
     private final OrderRepository repository;
 
     @Transactional
-    public OrderResponse createOrder(OrderRequest orderRequest) {
+    public OrderDetail createOrder(OrderRequest orderRequest) {
         var discount = getDiscount(orderRequest);
         var orderNumber = getOrderNumber();
 
-        repository.save(new OrderEntity(
+        repository.save(new OrderDetailEntity(
                 orderNumber,
                 orderRequest.getEmail(),
                 discount == 0 ? "" : orderRequest.getPromoCode(),
                 orderRequest.getQuantity())
         );
 
-        return new OrderResponse(orderNumber, orderRequest.getEmail(), orderRequest.getQuantity(), discount);
+        return new OrderDetail(orderNumber, orderRequest.getEmail(), orderRequest.getQuantity(), discount);
     }
 
     private Integer getDiscount(OrderRequest orderRequest) {

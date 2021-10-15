@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @AllArgsConstructor
-public class OrderResponse {
+public class OrderDetail {
     String orderNumber;
     String email;
     Integer quantity;

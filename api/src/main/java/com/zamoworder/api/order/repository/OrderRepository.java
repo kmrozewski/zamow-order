@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface OrderRepository extends CrudRepository<OrderEntity, Long> {
+public interface OrderRepository extends CrudRepository<OrderDetailEntity, Long> {
 
-    List<OrderEntity> findByPromoCode(String promoCode);
+    List<OrderDetailEntity> findByPromoCode(String promoCode);
 }

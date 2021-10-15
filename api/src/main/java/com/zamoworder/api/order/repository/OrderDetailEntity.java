@@ -15,7 +15,7 @@ import static javax.persistence.GenerationType.AUTO;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class OrderEntity {
+public class OrderDetailEntity {
 
     @Id
     @GeneratedValue(strategy = AUTO)
