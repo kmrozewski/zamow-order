@@ -12,7 +12,7 @@ export default function OrderConfirmed() {
 				<Card.Body>
 					<Card.Title>Order {orderDetail.orderNumber}</Card.Title>
 					<Card.Text>
-					Thank you for purchasing our product. Below are order details:
+					Thank you for purchasing our product. Order details are below:
 					</Card.Text>
 				</Card.Body>
 				<ListGroup variant="flush">
